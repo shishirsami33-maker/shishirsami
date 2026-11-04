@@ -1,8 +1,19 @@
 /**
  * Shishir's Lab - Core JavaScript Engine
- * Handles navigation, entrance animation, lightbox, masonry filtering,
+ * Handles clean URLs, navigation, entrance animation, lightbox, masonry filtering,
  * modal dialogs, and video controls.
  */
+
+// Clean URLs in browser address bar (strips .html cleanly if present)
+(function enforceCleanUrlBar() {
+  if (typeof window !== 'undefined' && window.location && window.location.protocol !== 'file:') {
+    const pathname = window.location.pathname;
+    if (pathname.endsWith('.html')) {
+      const clean = pathname.replace(/(?:index)?\.html$/, '') || '/';
+      window.history.replaceState(null, '', clean + window.location.search + window.location.hash);
+    }
+  }
+})();
 
 document.addEventListener('DOMContentLoaded', () => {
   initEntranceAnimation();
