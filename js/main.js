@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initEntranceAnimation();
   initHeader();
   initGlanceModal();
+  initContactPanel();
   initSpotlight();
   initPortfolio();
   initProjectModal();
@@ -115,6 +116,67 @@ function initGlanceModal() {
     if (e.key === 'Escape' && glanceModal.classList.contains('active')) {
       close();
     }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   3.1 Contact Panel Modal / Slide-Over
+   -------------------------------------------------------------------------- */
+function initContactPanel() {
+  const contactTriggers = document.querySelectorAll('[data-open-contact]');
+  const contactModal = document.getElementById('contactModal');
+  if (!contactModal) return;
+
+  const closeBtn = document.getElementById('contactModalCloseBtn');
+
+  function open() {
+    contactModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    contactModal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  contactTriggers.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      open();
+    });
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', close);
+  contactModal.addEventListener('click', (e) => {
+    if (e.target === contactModal) close();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && contactModal.classList.contains('active')) {
+      close();
+    }
+  });
+
+  // Clipboard copy handler for contact details
+  document.querySelectorAll('[data-copy]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const text = btn.getAttribute('data-copy');
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.style.color = '#D4FF24';
+        btn.style.borderColor = '#D4FF24';
+        setTimeout(() => {
+          btn.textContent = orig;
+          btn.style.color = '';
+          btn.style.borderColor = '';
+        }, 2000);
+      }).catch(() => {
+        // Fallback prompt
+        window.prompt('Copy contact info:', text);
+      });
+    });
   });
 }
 
@@ -272,7 +334,7 @@ function updateLightboxContent() {
 /* --------------------------------------------------------------------------
    5. Portfolio Page: Featured Video, Masonry, Filters & Tree
    -------------------------------------------------------------------------- */
-let activeCategory = 'all';
+let activeCategory = 'events'; // Default to first continuous category (All Work removed)
 let activeSubcategory = 'all';
 let searchQuery = '';
 let visibleCount = 12;
@@ -338,7 +400,7 @@ function initCategoryFilters() {
       const cat = btn.getAttribute('data-category');
       const countSpan = btn.querySelector('.tab-count');
       if (countSpan) {
-        const count = cat === 'all' ? all.length : all.filter(p => p.category === cat).length;
+        const count = all.filter(p => p.category === cat).length;
         countSpan.textContent = count;
       }
     });
@@ -444,8 +506,17 @@ function renderMasonry() {
 
   // Filter
   const filtered = allProjects.filter(item => {
+    // Search query match: if searching, search across all projects seamlessly!
+    if (searchQuery) {
+      const matchTitle = item.title && item.title.toLowerCase().includes(searchQuery);
+      const matchDesc = item.desc && item.desc.toLowerCase().includes(searchQuery);
+      const matchOrg = item.org && item.org.toLowerCase().includes(searchQuery);
+      const matchTags = item.tags && item.tags.some(t => t.toLowerCase().includes(searchQuery));
+      return (matchTitle || matchDesc || matchOrg || matchTags);
+    }
+
     // Category match
-    if (activeCategory !== 'all' && item.category !== activeCategory) {
+    if (activeCategory && item.category !== activeCategory) {
       return false;
     }
 
@@ -454,20 +525,15 @@ function renderMasonry() {
       if (item.subCategory !== activeSubcategory) return false;
     }
 
-    // Search query match
-    if (searchQuery) {
-      const matchTitle = item.title.toLowerCase().includes(searchQuery);
-      const matchDesc = item.desc && item.desc.toLowerCase().includes(searchQuery);
-      const matchOrg = item.org && item.org.toLowerCase().includes(searchQuery);
-      const matchTags = item.tags && item.tags.some(t => t.toLowerCase().includes(searchQuery));
-      if (!matchTitle && !matchDesc && !matchOrg && !matchTags) return false;
-    }
-
     return true;
   });
 
   if (counterText) {
-    counterText.textContent = `${filtered.length} items found`;
+    if (searchQuery) {
+      counterText.textContent = `${filtered.length} items found for "${searchQuery}"`;
+    } else {
+      counterText.textContent = `${filtered.length} items in category`;
+    }
   }
 
   // Progressive reveal slice

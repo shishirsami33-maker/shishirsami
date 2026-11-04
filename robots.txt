@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 
+# Host & Sitemap for Google Search Console
+Host: https://www.shishirsami.com
 Sitemap: https://www.shishirsami.com/sitemap.xml
-

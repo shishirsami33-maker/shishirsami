@@ -121,5 +121,26 @@ Ensure your domain points to Hostinger's nameservers or A records:
 
 ---
 
+## 5. Google Search Console & Custom Domain Setup
+
+### A. Submitting to Google Search Console
+1. Go to **Google Search Console** (`https://search.google.com/search-console/`).
+2. Add a Property:
+   - **Method 1 (Recommended - Domain Property)**: Enter `shishirsami.com`. Google will provide a DNS TXT verification record (e.g., `google-site-verification=xxxx`).
+     - Go to Hostinger hPanel → **DNS Zone Editor**.
+     - Add a **TXT Record**: Host `@`, TXT Value `google-site-verification=xxxx`. Click Verify in Search Console.
+   - **Method 2 (HTML Tag)**: Copy the verification meta tag provided by Google and paste your token into the placeholder in `<head>` of `index.html`:
+     `<meta name="google-site-verification" content="YOUR_TOKEN_HERE">`
+3. Once verified, submit your sitemap:
+   - In Search Console sidebar, click **Sitemaps**.
+   - Enter `sitemap.xml` and click **Submit**.
+   - Your URLs (`/`, `/portfolio.html`, `/about.html`) and image schema will be crawled and indexed.
+
+### B. Custom Domain (`shishirsami.com` & `www.shishirsami.com`)
+- The `CNAME` file in the root is set to `shishirsami.com`.
+- All assets, styles, scripts, and documents use clean relative paths, ensuring complete compatibility with root domain, `www`, GitHub Pages, and Hostinger `public_html`.
+
+---
+
 © 2026 Md Shahriar Shishir Sami. Shishir’s Lab.
 

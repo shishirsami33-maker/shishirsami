@@ -11,7 +11,7 @@
   <link rel="canonical" href="https://www.shishirsami.com/">
   <meta name="theme-color" content="#030407">
 
-  <!-- Launch-Ready Favicons -->
+  <!-- Launch-Ready Favicons (New 16-point Starburst Design) -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
@@ -24,9 +24,9 @@
   <meta property="og:site_name" content="Shishir’s Lab">
   <meta property="og:title" content="Md Shahriar Shishir Sami — Shishir’s Lab">
   <meta property="og:description" content="Ideas to execution. Strategy, research, digital operations, and creative direction from Dhaka, Bangladesh.">
-  <meta property="og:image" content="https://www.shishirsami.com/assets/img/hero/hero-portrait-editorial.jpg">
-  <meta property="og:image:width" content="630">
-  <meta property="og:image:height" content="452">
+  <meta property="og:image" content="https://www.shishirsami.com/assets/img/hero/hero-dp.jpg">
+  <meta property="og:image:width" content="1080">
+  <meta property="og:image:height" content="1080">
   <meta property="og:locale" content="en_US">
   
   <!-- Twitter Card -->
@@ -34,7 +34,64 @@
   <meta name="twitter:url" content="https://www.shishirsami.com/">
   <meta name="twitter:title" content="Md Shahriar Shishir Sami — Shishir’s Lab">
   <meta name="twitter:description" content="Ideas to execution. Strategy, research, digital operations, and creative direction from Dhaka, Bangladesh.">
-  <meta name="twitter:image" content="https://www.shishirsami.com/assets/img/hero/hero-portrait-editorial.jpg">
+  <meta name="twitter:image" content="https://www.shishirsami.com/assets/img/hero/hero-dp.jpg">
+  
+  <!-- Google Search Console Verification Meta Tag Hook -->
+  <!-- You can paste your GSC token below or verify via DNS TXT at Hostinger -->
+  <meta name="google-site-verification" content="GSC_VERIFICATION_TOKEN">
+
+  <!-- Schema.org Structured Data (JSON-LD) for Rich Results & Google Search Console -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://www.shishirsami.com/#person",
+        "name": "Md Shahriar Shishir Sami",
+        "alternateName": ["Shishir", "Shishir Sami"],
+        "url": "https://www.shishirsami.com",
+        "image": "https://www.shishirsami.com/assets/img/hero/hero-dp.jpg",
+        "jobTitle": "Creative Director & Strategy Coordinator",
+        "description": "Economics undergraduate at American International University-Bangladesh (AIUB), researcher, debater, and multidisciplinary creative director based in Dhaka, Bangladesh.",
+        "email": "mailto:shishirsami33@gmail.com",
+        "telephone": "+8801816729550",
+        "alumniOf": [
+          {
+            "@type": "EducationalOrganization",
+            "name": "American International University-Bangladesh",
+            "alternateName": "AIUB"
+          },
+          {
+            "@type": "EducationalOrganization",
+            "name": "Barishal Cadet College",
+            "alternateName": "BCC"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Dhaka",
+          "addressCountry": "BD"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/shishirsami",
+          "https://github.com/shishirsami33-maker",
+          "https://wa.me/8801816729550"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.shishirsami.com/#website",
+        "url": "https://www.shishirsami.com",
+        "name": "Shishir's Lab",
+        "description": "Personal creative lab and multidisciplinary portfolio of Md Shahriar Shishir Sami.",
+        "publisher": {
+          "@id": "https://www.shishirsami.com/#person"
+        }
+      }
+    ]
+  }
+  </script>
   
   <link rel="stylesheet" href="css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,10 +117,10 @@
   <header class="site-header" role="banner">
     <div class="container nav-container">
       
-      <!-- Brand with Lime Spark -->
+      <!-- Brand with New 16-Point Lime Spark -->
       <a href="index.html" class="brand-link" aria-label="Shishir's Lab Home">
-        <svg class="brand-spark" viewBox="0 0 24 24" fill="#D4FF24" width="20" height="20" aria-hidden="true">
-          <path d="M11 1.5h2v7.7l5.45-5.45 1.41 1.41-5.45 5.45h7.69v2h-7.7l5.46 5.46-1.41 1.41-5.46-5.46V22.5h-2v-7.7l-5.46 5.46-1.41-1.41 5.46-5.46H1.9v-2h7.7L4.14 5.92 5.55 4.51 11 9.96V1.5z"/>
+        <svg class="brand-spark" viewBox="0 0 100 100" fill="#D4FF24" width="20" height="20" aria-hidden="true">
+          <path d="M50 12 L55 38 L81 25 L65 48 L90 55 L65 62 L81 85 L55 72 L50 98 L45 72 L19 85 L35 62 L10 55 L35 48 L19 25 L45 38 Z"/>
         </svg>
         <span class="brand-text"><strong>SHISHIR</strong> <span class="brand-slash">/</span> LAB</span>
       </a>
@@ -75,9 +132,9 @@
         <a href="about.html" class="nav-item">About</a>
       </nav>
 
-      <!-- Right Action CTA -->
+      <!-- Right Action CTA: Opens Contact Panel -->
       <div class="nav-actions">
-        <a href="mailto:shishirsami33@gmail.com" class="btn-nav-talk">Let's talk ↗</a>
+        <button class="btn-nav-talk" data-open-contact aria-label="Open contact panel">Let's talk ↗</button>
       </div>
 
       <button class="mobile-nav-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
@@ -145,21 +202,21 @@
             </div>
           </div>
 
-          <!-- Column 2: Center Blue Portrait -->
+          <!-- Column 2: Center Main DP Card (Hero Image at Podium) -->
           <div class="hero-editorial-col hero-col-center">
             <div class="hero-portrait-card">
               <picture>
-                <source srcset="assets/img/hero/hero-portrait-editorial.webp" type="image/webp">
+                <source srcset="assets/img/hero/hero-dp.webp" type="image/webp">
                 <img class="hero-portrait-editorial-img" 
-                     src="assets/img/hero/hero-portrait-editorial.jpg" 
-                     alt="Md Shahriar Shishir Sami wearing round sunglasses in blue editorial lighting" 
-                     width="630" height="452" fetchpriority="high">
+                     src="assets/img/hero/hero-dp.jpg" 
+                     alt="Md Shahriar Shishir Sami speaking at podium" 
+                     width="1080" height="1080" fetchpriority="high">
               </picture>
               
-              <!-- Acid Lime Spark Icon in Top Right -->
+              <!-- Acid Lime Spark Icon in Top Right (New 16-point design) -->
               <div class="portrait-spark-overlay" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="#D4FF24" width="28" height="28">
-                  <path d="M11 1.5h2v7.7l5.45-5.45 1.41 1.41-5.45 5.45h7.69v2h-7.7l5.46 5.46-1.41 1.41-5.46-5.46V22.5h-2v-7.7l-5.46 5.46-1.41-1.41 5.46-5.46H1.9v-2h7.7L4.14 5.92 5.55 4.51 11 9.96V1.5z"/>
+                <svg viewBox="0 0 100 100" fill="#D4FF24" width="28" height="28">
+                  <path d="M50 12 L55 38 L81 25 L65 48 L90 55 L65 62 L81 85 L55 72 L50 98 L45 72 L19 85 L35 62 L10 55 L35 48 L19 25 L45 38 Z"/>
                 </svg>
               </div>
 
@@ -207,7 +264,7 @@
         <!-- 4. Hero Bottom Ticker / Bar -->
         <div class="hero-bottom-ticker">
           <div class="ticker-left">
-            <a href="mailto:shishirsami33@gmail.com" class="ticker-link">SHISHIRSAMI33@GMAIL.COM ↗</a>
+            <button class="ticker-link btn-link-reset" data-open-contact aria-label="Open contact panel">SHISHIRSAMI33@GMAIL.COM ↗</button>
           </div>
           <div class="ticker-center">
             <a href="https://www.linkedin.com/in/shishirsami" target="_blank" rel="noopener noreferrer" class="ticker-link">LINKEDIN ↗</a>
@@ -326,6 +383,111 @@
     </div>
   </div>
 
+  <!-- Proper Contact Panel Modal / Slide-Over -->
+  <div id="contactModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Contact Md Shahriar Shishir Sami">
+    <div class="modal-sheet contact-panel-sheet">
+      <div class="modal-sheet-header">
+        <div class="contact-header-title-box">
+          <span class="mono contact-status-badge">● AVAILABLE FOR ENGAGEMENTS &amp; ROLES</span>
+          <h2 class="modal-sheet-title">Initiate Contact</h2>
+        </div>
+        <button id="contactModalCloseBtn" class="modal-close-btn" aria-label="Close Contact Panel [ESC]">✕</button>
+      </div>
+
+      <div class="modal-sheet-content">
+        <p class="contact-panel-intro">
+          Reach out directly for corporate employment opportunities, strategy coordination, macroeconomic research, or creative direction commissions.
+        </p>
+
+        <!-- Primary Contact Channels Grid -->
+        <div class="contact-channels-grid">
+          
+          <!-- Channel 1: Email -->
+          <div class="contact-channel-card">
+            <div class="channel-card-top">
+              <span class="channel-label-mono">01 / OFFICIAL EMAIL</span>
+              <span class="channel-verified-badge">PRIMARY</span>
+            </div>
+            <div class="channel-value">shishirsami33@gmail.com</div>
+            <p class="channel-hint">Typical response within 2–4 hours during business days.</p>
+            <div class="channel-actions">
+              <a href="mailto:shishirsami33@gmail.com" class="btn btn-primary btn-sm">Draft Email ↗</a>
+              <button class="btn btn-secondary btn-sm" data-copy="shishirsami33@gmail.com">Copy Email</button>
+            </div>
+          </div>
+
+          <!-- Channel 2: Phone & WhatsApp -->
+          <div class="contact-channel-card">
+            <div class="channel-card-top">
+              <span class="channel-label-mono">02 / PHONE &amp; WHATSAPP</span>
+              <span class="channel-verified-badge">DIRECT</span>
+            </div>
+            <div class="channel-value">+880 1816729550</div>
+            <p class="channel-hint">Voice calls &amp; WhatsApp instant messaging.</p>
+            <div class="channel-actions">
+              <a href="https://wa.me/8801816729550" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm whatsapp-btn">WhatsApp Chat ↗</a>
+              <a href="tel:+8801816729550" class="btn btn-secondary btn-sm">Call Direct ↗</a>
+              <button class="btn btn-secondary btn-sm" data-copy="+8801816729550">Copy Phone</button>
+            </div>
+          </div>
+
+          <!-- Channel 3: Location & Timezone -->
+          <div class="contact-channel-card">
+            <div class="channel-card-top">
+              <span class="channel-label-mono">03 / LOCATION &amp; TIMEZONE</span>
+              <span class="channel-verified-badge">DHAKA</span>
+            </div>
+            <div class="channel-value">Dhaka, Bangladesh</div>
+            <p class="channel-hint">Timezone: UTC+06:00 (BST) • Available for international remote &amp; on-site roles.</p>
+            <div class="channel-meta-pill">
+              <span>Standard Hours: 09:00 – 20:00 BST</span>
+            </div>
+          </div>
+
+          <!-- Channel 4: Verified Profiles & Résumé -->
+          <div class="contact-channel-card">
+            <div class="channel-card-top">
+              <span class="channel-label-mono">04 / PROFILES &amp; RÉSUMÉ</span>
+              <span class="channel-verified-badge">VERIFIED</span>
+            </div>
+            <div class="channel-profiles-links">
+              <a href="https://www.linkedin.com/in/shishirsami" target="_blank" rel="noopener noreferrer" class="channel-link-pill">
+                <span>LinkedIn Profile ↗</span>
+              </a>
+              <a href="https://github.com/shishirsami33-maker" target="_blank" rel="noopener noreferrer" class="channel-link-pill">
+                <span>GitHub Archive ↗</span>
+              </a>
+              <a href="assets/docs/cv/Md_Shahriar_Shishir_Sami_Resume.pdf" download class="channel-link-pill highlight-pill">
+                <span>Download Official Résumé (PDF) ↓</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Quick Subject Pre-sets -->
+        <div class="contact-quick-inquiries">
+          <span class="quick-inquiries-title mono">QUICK INQUIRY TOPICS:</span>
+          <div class="quick-inquiries-pills">
+            <a href="mailto:shishirsami33@gmail.com?subject=Full-time%20Role%20Inquiry%20%7C%20Md%20Shahriar%20Shishir%20Sami" class="quick-inquiry-btn">
+              💼 Employment Opportunity
+            </a>
+            <a href="mailto:shishirsami33@gmail.com?subject=Strategy%20%26%20Research%20Project%20%7C%20Shishir%27s%20Lab" class="quick-inquiry-btn">
+              📊 Strategy &amp; Research
+            </a>
+            <a href="mailto:shishirsami33@gmail.com?subject=Brand%20%26%20Design%20Commission%20%7C%20Shishir%27s%20Lab" class="quick-inquiry-btn">
+              🎨 Design Studio Commission
+            </a>
+            <a href="mailto:shishirsami33@gmail.com?subject=General%20Collaboration%20%7C%20Shishir%27s%20Lab" class="quick-inquiry-btn">
+              🤝 General Collaboration
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
   <!-- Site Footer -->
   <footer class="site-footer" role="contentinfo">
     <div class="container footer-container">
@@ -337,7 +499,7 @@
         <a href="index.html" class="footer-link">Home</a>
         <a href="portfolio.html" class="footer-link">Portfolio</a>
         <a href="about.html" class="footer-link">About</a>
-        <a href="mailto:shishirsami33@gmail.com" class="footer-link text-lime">shishirsami33@gmail.com</a>
+        <button class="footer-link text-lime btn-link-reset" data-open-contact>Contact Panel ↗</button>
       </div>
     </div>
   </footer>

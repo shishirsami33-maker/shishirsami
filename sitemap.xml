@@ -1,22 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.shishirsami.com/</loc>
-    <lastmod>2026-11-03</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.shishirsami.com/assets/img/hero/hero-dp.jpg</image:loc>
+      <image:title>Md Shahriar Shishir Sami — Shishir's Lab</image:title>
+      <image:caption>Md Shahriar Shishir Sami speaking at podium</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://www.shishirsami.com/portfolio.html</loc>
-    <lastmod>2026-11-03</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.shishirsami.com/about.html</loc>
-    <lastmod>2026-11-03</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.shishirsami.com/assets/img/hero/hero-portrait.jpg</image:loc>
+      <image:title>Md Shahriar Shishir Sami Portrait</image:title>
+    </image:image>
   </url>
 </urlset>
-
