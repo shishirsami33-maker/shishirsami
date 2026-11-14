@@ -38,3 +38,4 @@ RewriteRule ^(.*)$ $1.html [L]
   ExpiresByType image/jpeg "access plus 1 year"
   ExpiresByType font/woff2 "access plus 1 year"
 </IfModule>
+

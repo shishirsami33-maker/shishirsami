@@ -282,7 +282,7 @@
     </section>
 
     <!-- Spotlight Section (Immediately Below Hero) -->
-    <section id="spotlight" class="section" aria-label="Spotlight Archive">
+    <section id="spotlight" class="section spotlight-section" aria-label="Spotlight Archive">
       <div class="container">
         
         <div class="section-head with-action">
@@ -293,15 +293,59 @@
               Real moments, milestones, competitive debates, and stage leadership captured across Cadet College and AIUB.
             </p>
           </div>
-          <div>
-            <button id="toggleAllSpotlightBtn" class="btn btn-secondary btn-sm" aria-label="Expand all 20 spotlight moments">
+          <div class="spotlight-head-actions">
+            <!-- 3D Curved Carousel vs Photo Grid View Mode Toggle -->
+            <div class="view-mode-toggle" role="group" aria-label="Spotlight View Mode">
+              <button id="spotlightCarouselViewBtn" class="view-toggle-btn active" title="3D Curved Carousel Mode">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                <span>3D Carousel</span>
+              </button>
+              <button id="spotlightGridViewBtn" class="view-toggle-btn" title="Photo Wall Grid Mode">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                <span>Grid</span>
+              </button>
+            </div>
+            <button id="toggleAllSpotlightBtn" class="btn btn-secondary btn-sm" aria-label="Expand all 20 spotlight moments" style="display: none;">
               View all moments (20) ↓
             </button>
           </div>
         </div>
 
-        <!-- Editorial Photo Grid (Populated dynamically by js/main.js using js/data.js) -->
-        <div id="spotlightGrid" class="spotlight-grid" role="region" aria-label="Spotlight Photographs Grid">
+        <!-- 3D Curved Carousel Display for Spotlight (Active by default) -->
+        <div id="spotlightCarouselContainer" class="curved-carousel-container" role="region" aria-label="Spotlight 3D Curved Carousel">
+          <div class="carousel-3d-scene" id="spotlight3dScene" tabindex="0" role="region" aria-label="Interactive 3D Photo Carousel. Drag or use arrow keys to rotate.">
+            <!-- Left and Right Nav Buttons -->
+            <button class="carousel-nav-btn carousel-nav-prev" id="spotlightPrevBtn" aria-label="Previous Moment [Arrow Left]">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button class="carousel-nav-btn carousel-nav-next" id="spotlightNextBtn" aria-label="Next Moment [Arrow Right]">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+
+            <!-- 3D Cylindrical Track -->
+            <div class="carousel-3d-track" id="spotlight3dTrack">
+              <!-- Populated dynamically by js/main.js -->
+            </div>
+          </div>
+
+          <!-- Carousel Controls Dock -->
+          <div class="carousel-controls-dock">
+            <div class="carousel-counter-box mono">
+              <span class="carousel-counter-current" id="spotlightCounterCurrent">01</span>
+              <span class="carousel-counter-slash">/</span>
+              <span class="carousel-counter-total" id="spotlightCounterTotal">20</span>
+            </div>
+            <div class="carousel-scrub-track" id="spotlightScrubTrack" role="slider" aria-label="Carousel Position Track" aria-valuemin="1" aria-valuemax="20" aria-valuenow="1">
+              <div class="carousel-scrub-fill" id="spotlightScrubFill"></div>
+            </div>
+            <div class="carousel-drag-hint mono">
+              <span class="drag-hint-icon">↔</span> DRAG OR SWIPE &bull; CLICK TO INSPECT
+            </div>
+          </div>
+        </div>
+
+        <!-- Editorial Photo Grid (Can be toggled via Grid button) -->
+        <div id="spotlightGrid" class="spotlight-grid" role="region" aria-label="Spotlight Photographs Grid" style="display: none;">
           <!-- Populated dynamically -->
         </div>
 

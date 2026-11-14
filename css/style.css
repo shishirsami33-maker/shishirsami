@@ -1713,6 +1713,28 @@ ul, ol {
   color: var(--lime);
 }
 
+.card-direct-live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #030407;
+  background: var(--lime);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  line-height: 1;
+}
+
+.card-direct-live-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 12px rgba(212, 255, 36, 0.6);
+  background: #e4ff66;
+  color: #000;
+}
+
 /* Progressive Reveal Controls */
 .reveal-controls {
   display: flex;
@@ -2768,3 +2790,510 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   }
 }
 
+
+
+/* --------------------------------------------------------------------------
+   3D Curved Carousel Display System (Spotlight & Portfolio)
+   -------------------------------------------------------------------------- */
+.curved-carousel-container {
+  position: relative;
+  width: 100%;
+  margin: 20px 0 32px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carousel-3d-scene {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+  touch-action: pan-y pinch-zoom;
+  cursor: grab;
+  background: radial-gradient(ellipse at 50% 50%, rgba(21, 88, 201, 0.08) 0%, rgba(3, 4, 7, 0) 75%);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.carousel-3d-scene:active {
+  cursor: grabbing;
+}
+
+.carousel-3d-scene:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: -2px;
+}
+
+.carousel-3d-track {
+  position: relative;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Individual 3D Card Base */
+.card-3d {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: var(--radius-md);
+  background: #060913;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.7);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.45s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease,
+              filter 0.45s ease;
+  will-change: transform, opacity, filter;
+  transform-origin: center center;
+  cursor: pointer;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Format 1: Portrait / Square Form */
+.card-3d.format-portrait,
+.card-3d:not(.format-landscape) {
+  width: 320px;
+  height: 440px;
+  margin-top: -220px;
+  margin-left: -160px;
+}
+
+/* Format 2: Landscape / Banner / Widescreen Form */
+.card-3d.format-landscape {
+  width: 530px;
+  height: 350px;
+  margin-top: -175px;
+  margin-left: -265px;
+}
+
+.card-3d.is-dragging {
+  transition: none !important;
+}
+
+/* Side Card Styling (dimmed & blurred slightly for depth) */
+.card-3d:not(.is-center) {
+  filter: brightness(0.65) saturate(0.85);
+}
+
+.card-3d:not(.is-center):hover {
+  filter: brightness(0.9) saturate(1);
+  border-color: rgba(21, 88, 201, 0.5);
+}
+
+/* Center Active Card: High-contrast focus, lime glow, pop */
+.card-3d.is-center {
+  border-color: var(--lime);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.9), 0 0 30px rgba(212, 255, 36, 0.25), 0 0 0 1.5px var(--lime);
+  filter: brightness(1) saturate(1);
+}
+
+/* Inside the 3D Card */
+.card-3d-media-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #020306;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ambient Backdrop Mirror for wide banners or odd aspect ratios */
+.card-3d-backdrop-blur {
+  position: absolute;
+  inset: -15px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(26px) brightness(0.24);
+  opacity: 0.82;
+  transform: scale(1.15);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Portrait Image display: full bleed portrait */
+.card-3d.format-portrait .card-3d-img,
+.card-3d:not(.format-landscape) .card-3d-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+/* Landscape / Banner / Webpage Image display: clean, unclipped, comfortable preview */
+.card-3d.format-landscape .card-3d-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.card-3d.is-center:hover .card-3d-img {
+  transform: scale(1.03);
+}
+
+.card-3d-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.card-3d.format-portrait .card-3d-overlay,
+.card-3d:not(.format-landscape) .card-3d-overlay {
+  background: linear-gradient(to top, rgba(3, 4, 7, 0.98) 0%, rgba(3, 4, 7, 0.45) 50%, rgba(3, 4, 7, 0.15) 100%);
+  padding: 18px;
+}
+
+.card-3d.format-landscape .card-3d-overlay {
+  background: linear-gradient(to top, rgba(3, 4, 7, 0.96) 0%, rgba(3, 4, 7, 0.32) 45%, rgba(3, 4, 7, 0.15) 100%);
+  padding: 14px 18px;
+}
+
+.card-3d-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-3d-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  background: rgba(3, 4, 7, 0.85);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
+}
+
+.card-3d.is-center .card-3d-badge {
+  border-color: rgba(212, 255, 36, 0.5);
+  color: var(--lime);
+}
+
+.card-3d-category-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--cobalt-light);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(21, 88, 201, 0.18);
+  border: 1px solid rgba(21, 88, 201, 0.4);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.card-3d-bottom-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-3d-meta-sub {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.card-3d-title {
+  font-size: 1.12rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--text-primary);
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+}
+
+.card-3d.format-landscape .card-3d-title {
+  font-size: 1.05rem;
+}
+
+.card-3d-action-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 7px 13px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  margin-top: 4px;
+  width: fit-content;
+  transition: all var(--transition-fast);
+}
+
+.card-3d.is-center .card-3d-action-pill {
+  background: var(--lime);
+  color: var(--bg-canvas);
+  border-color: var(--lime);
+}
+
+.card-3d.is-center:hover .card-3d-action-pill {
+  box-shadow: 0 0 15px rgba(212, 255, 36, 0.6);
+  transform: translateY(-1px);
+}
+
+/* Floating Navigation Arrows */
+.carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 120;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(6, 9, 19, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+.carousel-nav-prev {
+  left: 20px;
+}
+
+.carousel-nav-next {
+  right: 20px;
+}
+
+.carousel-nav-btn:hover {
+  background: var(--bg-surface);
+  border-color: var(--lime);
+  color: var(--lime);
+  box-shadow: 0 0 20px rgba(212, 255, 36, 0.35);
+  transform: translateY(-50%) scale(1.08);
+}
+
+/* Carousel Controls Dock (Bottom) */
+.carousel-controls-dock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 640px;
+  padding: 14px 20px;
+  margin-top: 14px;
+  background: rgba(6, 9, 19, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 40px;
+  gap: 16px;
+}
+
+.carousel-counter-box {
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.carousel-counter-current {
+  color: var(--lime);
+  font-size: 1rem;
+}
+
+.carousel-counter-slash {
+  color: var(--text-muted);
+}
+
+.carousel-counter-total {
+  color: var(--text-secondary);
+}
+
+.carousel-scrub-track {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.carousel-scrub-fill {
+  height: 100%;
+  width: 5%;
+  background: linear-gradient(to right, var(--cobalt-light), var(--lime));
+  border-radius: 3px;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.carousel-drag-hint {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.drag-hint-icon {
+  color: var(--lime);
+  font-size: 0.88rem;
+}
+
+/* View Mode Switcher */
+.view-mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(5, 8, 17, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 30px;
+  padding: 3px;
+  gap: 3px;
+}
+
+.view-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.view-toggle-btn:hover {
+  color: var(--text-primary);
+}
+
+.view-toggle-btn.active {
+  background: var(--cobalt);
+  color: #ffffff;
+  border: 1px solid var(--cobalt-light);
+  box-shadow: 0 0 12px rgba(21, 88, 201, 0.4);
+}
+
+.spotlight-head-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.portfolio-display-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 12px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.portfolio-items-counter {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+/* Responsive Rules for 3D Carousel (Adaptive Landscape vs Portrait) */
+@media (max-width: 900px) {
+  .carousel-3d-scene {
+    height: 480px;
+  }
+  .card-3d.format-portrait,
+  .card-3d:not(.format-landscape) {
+    width: 280px;
+    height: 400px;
+    margin-top: -200px;
+    margin-left: -140px;
+  }
+  .card-3d.format-landscape {
+    width: 450px;
+    height: 300px;
+    margin-top: -150px;
+    margin-left: -225px;
+  }
+  .carousel-nav-btn {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+@media (max-width: 600px) {
+  .carousel-3d-scene {
+    height: 430px;
+    perspective: 900px;
+  }
+  .card-3d.format-portrait,
+  .card-3d:not(.format-landscape) {
+    width: 240px;
+    height: 340px;
+    margin-top: -170px;
+    margin-left: -120px;
+  }
+  .card-3d.format-landscape {
+    width: 320px;
+    height: 220px;
+    margin-top: -110px;
+    margin-left: -160px;
+  }
+  .carousel-nav-prev {
+    left: 8px;
+  }
+  .carousel-nav-next {
+    right: 8px;
+  }
+  .carousel-controls-dock {
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: var(--radius-md);
+  }
+  .carousel-drag-hint {
+    display: none;
+  }
+}

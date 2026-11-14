@@ -195,26 +195,76 @@
             </div>
           </div>
 
-          <!-- Subcategory Filters for Design Studio -->
+          <!-- Subcategory Filters for Design Studio (Ordered: Social Media -> Raws -> Logos -> Custom -> Banners) -->
           <div id="designSubcategoriesBar" class="subcategories-bar" role="group" aria-label="Design Subcategories">
             <span class="mono" style="font-size: 0.76rem; color: var(--lime); align-self: center; margin-right: 6px; font-weight: 700;">TRACK:</span>
             <button class="subcat-btn active" data-subcat="all">All Designs (93)</button>
-            <button class="subcat-btn" data-subcat="brand">Brand &amp; Logos (16)</button>
             <button class="subcat-btn" data-subcat="social">Social Media (51)</button>
-            <button class="subcat-btn" data-subcat="posters">Posters &amp; Covers (8)</button>
-            <button class="subcat-btn" data-subcat="merch">Custom Merchandise (8)</button>
-            <button class="subcat-btn" data-subcat="raws">Raw Art &amp; Concepts (10)</button>
+            <button class="subcat-btn" data-subcat="raws">Raw Concepts (10)</button>
+            <button class="subcat-btn" data-subcat="brand">Logos &amp; Brand (16)</button>
+            <button class="subcat-btn" data-subcat="merch">Custom Merch (8)</button>
+            <button class="subcat-btn" data-subcat="posters">Banners &amp; Posters (8)</button>
           </div>
 
         </div>
 
-        <!-- Masonry Grid -->
-        <div id="masonryGrid" class="masonry-grid" role="region" aria-label="Projects Masonry Grid">
+        <!-- Portfolio Display Toolbar: Count & View Mode Switcher -->
+        <div class="portfolio-display-toolbar">
+          <div class="portfolio-items-counter mono" id="portfolioItemsCounter">
+            Showing 6 items in category
+          </div>
+          <div class="view-mode-toggle" role="group" aria-label="Portfolio View Mode">
+            <button id="portfolioCarouselViewBtn" class="view-toggle-btn active" title="3D Curved Carousel Mode">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <span>3D Carousel</span>
+            </button>
+            <button id="portfolioGridViewBtn" class="view-toggle-btn" title="Masonry Grid Mode">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              <span>Grid</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3D Curved Carousel Display for Portfolio (Active by default) -->
+        <div id="portfolioCarouselContainer" class="curved-carousel-container" role="region" aria-label="Portfolio 3D Curved Carousel">
+          <div class="carousel-3d-scene" id="portfolio3dScene" tabindex="0" role="region" aria-label="Interactive 3D Portfolio Carousel. Drag or use arrow keys to rotate.">
+            <!-- Left and Right Nav Buttons -->
+            <button class="carousel-nav-btn carousel-nav-prev" id="portfolioPrevBtn" aria-label="Previous Project [Arrow Left]">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button class="carousel-nav-btn carousel-nav-next" id="portfolioNextBtn" aria-label="Next Project [Arrow Right]">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+
+            <!-- 3D Cylindrical Track -->
+            <div class="carousel-3d-track" id="portfolio3dTrack">
+              <!-- Populated dynamically by js/main.js -->
+            </div>
+          </div>
+
+          <!-- Carousel Controls Dock -->
+          <div class="carousel-controls-dock">
+            <div class="carousel-counter-box mono">
+              <span class="carousel-counter-current" id="portfolioCounterCurrent">01</span>
+              <span class="carousel-counter-slash">/</span>
+              <span class="carousel-counter-total" id="portfolioCounterTotal">06</span>
+            </div>
+            <div class="carousel-scrub-track" id="portfolioScrubTrack" role="slider" aria-label="Carousel Position Track" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1">
+              <div class="carousel-scrub-fill" id="portfolioScrubFill"></div>
+            </div>
+            <div class="carousel-drag-hint mono">
+              <span class="drag-hint-icon">↔</span> DRAG OR SWIPE &bull; CLICK TO OPEN
+            </div>
+          </div>
+        </div>
+
+        <!-- Masonry Grid (Can be toggled via Grid button) -->
+        <div id="masonryGrid" class="masonry-grid" role="region" aria-label="Projects Masonry Grid" style="display: none;">
           <!-- Populated dynamically by js/main.js -->
         </div>
 
-        <!-- Progressive Reveal Controls -->
-        <div class="reveal-controls">
+        <!-- Progressive Reveal Controls (for Grid Mode) -->
+        <div id="masonryRevealControls" class="reveal-controls" style="display: none;">
           <div id="revealProgressText" class="reveal-progress-text">Showing 6 of 6 items</div>
           <button id="loadMoreWorkBtn" class="btn btn-secondary">
             Load More Work ↓
