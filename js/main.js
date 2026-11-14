@@ -857,13 +857,17 @@ function initFeaturedVideo() {
   window.addEventListener('pagehide', stopPlayback);
 }
 
-// 5.2 Category Filter Tabs
+// 5.2 Category Filter Tabs & Mobile Category Navigation
 function initCategoryFilters() {
   const tabButtons = document.querySelectorAll('.category-tab-btn');
   const subcatBar = document.getElementById('designSubcategoriesBar');
   const subcatBtns = document.querySelectorAll('.subcat-btn');
+  const mobileCatSelect = document.getElementById('mobileCategorySelect');
+  const scrollLeftBtn = document.getElementById('catScrollLeftBtn');
+  const scrollRightBtn = document.getElementById('catScrollRightBtn');
+  const tabsScroll = document.getElementById('categoryTabsScroll');
 
-  // Dynamically update tab counts
+  // Dynamically update tab counts & mobile dropdown counts
   if (window.SHISHIR_DATA && window.SHISHIR_DATA.projects) {
     const all = window.SHISHIR_DATA.projects;
     tabButtons.forEach(btn => {
@@ -874,30 +878,78 @@ function initCategoryFilters() {
         countSpan.textContent = count;
       }
     });
+
+    if (mobileCatSelect) {
+      Array.from(mobileCatSelect.options).forEach(opt => {
+        const cat = opt.value;
+        const count = all.filter(p => p.category === cat).length;
+        const baseLabel = opt.textContent.replace(/\s*\(\d+\)$/, '').trim();
+        opt.textContent = `${baseLabel} (${count})`;
+      });
+    }
   }
 
+  // Unified Category Selector Helper
+  window.selectPortfolioCategory = function(categoryKey, shouldScrollTab = true) {
+    activeCategory = categoryKey;
+    visibleCount = PAGE_SIZE;
+
+    // Update Tab Buttons
+    tabButtons.forEach(btn => {
+      const isTarget = btn.getAttribute('data-category') === categoryKey;
+      btn.classList.toggle('active', isTarget);
+      btn.setAttribute('aria-selected', isTarget ? 'true' : 'false');
+      if (isTarget && shouldScrollTab) {
+        btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    });
+
+    // Sync Mobile Selector
+    if (mobileCatSelect && mobileCatSelect.value !== categoryKey) {
+      mobileCatSelect.value = categoryKey;
+    }
+
+    // Show/hide design subcategory bar
+    if (activeCategory === 'design') {
+      if (subcatBar) subcatBar.classList.add('visible');
+    } else {
+      if (subcatBar) subcatBar.classList.remove('visible');
+      activeSubcategory = 'all';
+      subcatBtns.forEach(sb => sb.classList.remove('active'));
+      const allSubBtn = document.querySelector('.subcat-btn[data-subcat="all"]');
+      if (allSubBtn) allSubBtn.classList.add('active');
+    }
+
+    renderMasonry();
+  };
+
+  // Tab Button Click Listeners
   tabButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      tabButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      activeCategory = btn.getAttribute('data-category');
-      visibleCount = PAGE_SIZE;
-
-      // Show/hide design subcategory bar
-      if (activeCategory === 'design') {
-        if (subcatBar) subcatBar.classList.add('visible');
-      } else {
-        if (subcatBar) subcatBar.classList.remove('visible');
-        activeSubcategory = 'all';
-        subcatBtns.forEach(sb => sb.classList.remove('active'));
-        const allSubBtn = document.querySelector('.subcat-btn[data-subcat="all"]');
-        if (allSubBtn) allSubBtn.classList.add('active');
-      }
-
-      renderMasonry();
+      const cat = btn.getAttribute('data-category');
+      window.selectPortfolioCategory(cat, true);
     });
   });
+
+  // Mobile Dropdown Change Listener
+  if (mobileCatSelect) {
+    mobileCatSelect.addEventListener('change', (e) => {
+      window.selectPortfolioCategory(e.target.value, true);
+    });
+  }
+
+  // Left / Right Scroll Buttons
+  if (scrollLeftBtn && tabsScroll) {
+    scrollLeftBtn.addEventListener('click', () => {
+      tabsScroll.scrollBy({ left: -220, behavior: 'smooth' });
+    });
+  }
+
+  if (scrollRightBtn && tabsScroll) {
+    scrollRightBtn.addEventListener('click', () => {
+      tabsScroll.scrollBy({ left: 220, behavior: 'smooth' });
+    });
+  }
 
   subcatBtns.forEach(sb => {
     sb.addEventListener('click', () => {
@@ -937,23 +989,9 @@ function initPortfolioTree() {
       if (searchInput) searchInput.value = '';
       searchQuery = '';
 
-      // Activate corresponding category tab
-      const matchingTab = document.querySelector(`.category-tab-btn[data-category="${targetCat}"]`);
-      if (matchingTab) {
-        document.querySelectorAll('.category-tab-btn').forEach(b => b.classList.remove('active'));
-        matchingTab.classList.add('active');
-        activeCategory = targetCat;
+      if (typeof window.selectPortfolioCategory === 'function') {
+        window.selectPortfolioCategory(targetCat, true);
       }
-
-      const subcatBar = document.getElementById('designSubcategoriesBar');
-      if (activeCategory === 'design' && subcatBar) {
-        subcatBar.classList.add('visible');
-      } else if (subcatBar) {
-        subcatBar.classList.remove('visible');
-      }
-
-      visibleCount = PAGE_SIZE;
-      renderMasonry();
 
       // Smooth scroll to work categories
       const targetSection = document.getElementById('work-categories');
